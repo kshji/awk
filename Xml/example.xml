@@ -8,9 +8,9 @@
   </HEADER>
   <ADMIN>
     <ELEMENTX attr1="Value1" attr2="Value2">5.0.0</ELEMENTX>
-    <NO>123123</REQ_NO>
+    <NO>123123</NO>
     <REP>Some</REP>
-    <NO_REP>111-000-1111</TEL_NO_REP>
+    <NO_REP>111-000-1111</NO_REP>
   </ADMIN>
   <DATA>
     <PORTED_NUM>000-000-0000</PORTED_NUM>
