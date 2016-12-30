@@ -10,7 +10,7 @@ Here is some helps for XML files handling using Awk.
 
 This examples use standard Awk, no need for Gnu Awk extensions.
 
-You can look more question&answer from http://www.unix.com/search.php?searchid=2427388
+You can look more question&answer from http://www.unix.com/shell-programming-and-scripting/ and search xml or awk.
 
 ## Some nice commands to handle xml-data ##
 
