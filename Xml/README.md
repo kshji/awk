@@ -1,7 +1,8 @@
+# XML parsing using Awk #
 
 Here is some helps for XML files handling using Awk.
 
-*getXML.awk* is parser. It parse data to the some variables. You can use those variables to look
+**getXML.awk** is parser. It parse data to the some variables. You can use those variables to look
 values, elements, paths, attributes, ...
 
 You can easily reformat XML to the csv format and after that parse CSV format using awk. Usually it's
@@ -20,7 +21,9 @@ Xmllint is nice tool to test and format xml files:
 
 It also include XMLPATH support.
 
-==== example.xml ====
+## example.xml ##
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <PORT_RESPONSE>
   <HEADER>
@@ -39,19 +42,23 @@ It also include XMLPATH support.
     <PORTED_NUM>000-000-0000</PORTED_NUM>
   </DATA>
 </PORT_RESPONSE>
+```
 
 
 
 
-==== get.1.example.awk ====
+## get.1.example.awk ##
 Parse xml and printout what the getXML.awk can parse:
-  ''gawk -f get.1.example.awk example.xml''
+```sh
+  gawk -f get.1.example.awk example.xml
+```
 
 
-==== get.2.example.awk ====
+## get.2.example.awk ##
 Parse xml and printout out only element and attribute values with path:
-  ''gawk -f get.2.example.awk example.xml''
-
+```sh
+  gawk -f get.2.example.awk example.xml
+```
 Output:
 TAG|ELEMENT|PATH|ATTR|VALUE
 DAT|ORIGINATOR|/PORT_RESPONSE/HEADER/ORIGINATOR||XXXX
@@ -66,9 +73,11 @@ DAT|REP|/PORT_RESPONSE/ADMIN/REP||Some
 DAT|NO_REP|/PORT_RESPONSE/ADMIN/NO_REP||111-000-1111
 DAT|PORTED_NUM|/PORT_RESPONSE/DATA/PORTED_NUM||000-000-0000
 
-==== get.3.example.awk ====
+## get.3.example.awk ##
 Parse get.2.example.awk output = basic awk processing ...
-  ''gawk -f get.2.example.awk example.xml | awk -f get.3.example.awk''
+```sh
+  gawk -f get.2.example.awk example.xml | awk -f get.3.example.awk
+```
 
 Output:
 attr1 Value1
