@@ -29,9 +29,10 @@ cat example.xml | tr -d "\015\012"
 
 
 Other interesting command tools to handle Xml-data:
-	* xml2
-	* xmlstarlet
-	* xmllint
+   * xml2
+   * xmlstarlet
+   * xmllint
+   * PostgreSQL
 
 ### Xml2 ###
 ```sh
@@ -54,13 +55,19 @@ Output:
 ```
 ### Xmllint and XPATH ###
 
-What is XPath ?
+**XPath** ?
 http://www.w3schools.com/xml/xpath_examples.asp
 
 Get element PORTED_NUM value:
 ```sh
 xmllint example.xml --xpath '//PORTED_NUM/text()'
 ```
+
+### PostgreSQL ###
+Posgresql include field type XML and lot of nice XPath functions to parse XML to the tables.
+Postgresql command COPY is so fast to read xml file to the database. I'll the fastest method to parse xml to the Postgresql database.
+Look my git Postgresql directory.
+
 
 ## getXML.awk ##
 
@@ -146,7 +153,7 @@ PORTED_NUM 000-000-0000
 ```
 
 ## Simple AWK XML Parser ##
-If you need parse some elemnts from xml data, it can be done easily:
+If you need parse some elements from xml data, it can be done easily:
 
 This idea is simple: parse input using delimiter chars < > | " =
 ```awk
