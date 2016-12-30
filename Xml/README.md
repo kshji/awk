@@ -205,4 +205,16 @@ Output:
 ```text
 000-000-0000
 ```
+OR
 
+Caller give the element name to get values
+```awk
+awk -v key=PORTED_NUM '
+BEGIN {
+    RS="<"
+    FS=">"
+    }
+$1 == key { print $2 }
+' example.xml
+
+```
