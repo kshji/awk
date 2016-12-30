@@ -2,6 +2,8 @@
 
 Here is some helps for XML files handling using Awk.
 
+## getXML.awk ##
+
 **getXML.awk** is parser. It parse data to the some variables. You can use those variables to look
 values, elements, paths, attributes, ...
 
@@ -21,7 +23,7 @@ Xmllint is nice tool to test and format xml files:
 
 It also include XMLPATH support.
 
-## example.xml ##
+### example.xml ###
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47,19 +49,20 @@ It also include XMLPATH support.
 
 
 
-## get.1.example.awk ##
+### get.1.example.awk ###
 Parse xml and printout what the getXML.awk can parse:
 ```sh
   gawk -f get.1.example.awk example.xml
 ```
 
 
-## get.2.example.awk ##
+### get.2.example.awk ###
 Parse xml and printout out only element and attribute values with path:
 ```sh
   gawk -f get.2.example.awk example.xml
 ```
 Output:
+```text
 TAG|ELEMENT|PATH|ATTR|VALUE
 DAT|ORIGINATOR|/PORT_RESPONSE/HEADER/ORIGINATOR||XXXX
 DAT|DESTINATION|/PORT_RESPONSE/HEADER/DESTINATION||SOMEDEST
@@ -72,13 +75,17 @@ DAT|NO|/PORT_RESPONSE/ADMIN/NO||123123
 DAT|REP|/PORT_RESPONSE/ADMIN/REP||Some
 DAT|NO_REP|/PORT_RESPONSE/ADMIN/NO_REP||111-000-1111
 DAT|PORTED_NUM|/PORT_RESPONSE/DATA/PORTED_NUM||000-000-0000
+```
 
-## get.3.example.awk ##
+### get.3.example.awk ###
 Parse get.2.example.awk output = basic awk processing ...
 ```sh
   gawk -f get.2.example.awk example.xml | awk -f get.3.example.awk
 ```
 
 Output:
+```text
 attr1 Value1
+```
+
 PORTED_NUM 000-000-0000
