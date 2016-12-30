@@ -38,7 +38,7 @@ ei=$0.same.dat
 newver=$0.newversion.dat
 debug=1
 keyfld=1
-deli=" "  # on itseasiassa default, mutta onpahan malliksi, voi siten olla vaikka ;, voi olla myös useita eri merkkejä
+deli=" "  # whitespace is default, only example how you can set field sep. Chars or strings
 > $po
 > $uu
 > $mu
