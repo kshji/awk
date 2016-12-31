@@ -113,7 +113,7 @@ FROM my.xmlinput WHERE id=1
 ;
 
 -- parse xml text to the field type xml
-UPDATE joku.xmlinput  SET xmldata=xmlparse(CONTENT xmldoc)
+UPDATE my.xmlinput  SET xmldata=xmlparse(CONTENT xmldoc)
 WHERE xmldata IS NULL
 ;
 ```
@@ -180,21 +180,25 @@ Parse xml to the table format from xmldata field:
 ```sql
 SELECT 
        unnest(xpath('//@promotion-id',       xmldata)) keyvalue
-      ,unnest(xpath('//nametext/text()',     xmldata)) name
+      ,unnest(xpath('//nametext/text()',     xmldata)) "name"
       ,unnest(xpath('//enabled-flag/text()', xmldata)) enabled_flag
-      ,unnest(xpath('//exclusivity/text()',  xmldata)) exclusivity
-      ,unnest(xpath('//price/text()',        xmldata)) price
-FROM some.xmlinput
+FROM my.xmlinput
 ;
 
 ```
 
-It's normal that you need also cast field type:
+It's normal that you need also cast field type.
+Most of casting have to make using 1st text and then type what you need.
+Example boolean, date, int, ...
 
 ```sql
-	CAST( unnest(xpath('//@promotion-id',       xmldata)) AS text ) keyvalue
-	-- date, 1st cast to text and then date
-	-- CAST(CAST( unnest( xpath('//Some/Date/text()' , xmldata)) AS text) AS DATE) datevalue ,
+SELECT 
+       CAST(unnest(xpath('//@promotion-id',       xmldata)) AS text) keyvalue
+      ,CAST(unnest(xpath('//nametext/text()',     xmldata)) AS text) "name"
+      ,CAST( CAST (unnest(xpath('//enabled-flag/text()', xmldata)) AS text ) AS boolean) enabled_flag
+FROM my.xmlinput
+;
+
 ```
 
 Look more functions from doc. Example  **xpath_table** is powerfull function to make 

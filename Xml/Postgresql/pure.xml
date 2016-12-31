@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<promotions>
+    <promotion promotion-id="old-promotion">
+        <nametext>some1</nametext>
+        <enabled-flag>true</enabled-flag>
+        <searchable-flag>false</searchable-flag>
+    </promotion>
+    <promotion promotion-id="new-promotion">
+        <nametext>some2</nametext>
+        <enabled-flag>false</enabled-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <price>100</price>
+        <price>200</price>
+        <price>300</price>
+    </promotion>
+</promotions>
