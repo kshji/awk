@@ -41,17 +41,17 @@ xml2 < example.xml
 
 Output:
 ```text
-/PORT_RESPONSE/HEADER/ORIGINATOR=XXXX
-/PORT_RESPONSE/HEADER/DESTINATION=SOMEDEST
-/PORT_RESPONSE/HEADER/MESSAGE_ID=XXXXX1111XXX
-/PORT_RESPONSE/HEADER/MSGTYPE=PRI
-/PORT_RESPONSE/ADMIN/ELEMENTX/@attr1=Value1
-/PORT_RESPONSE/ADMIN/ELEMENTX/@attr2=Value2
-/PORT_RESPONSE/ADMIN/ELEMENTX=5.0.0
-/PORT_RESPONSE/ADMIN/NO=123123
-/PORT_RESPONSE/ADMIN/REP=Some
-/PORT_RESPONSE/ADMIN/NO_REP=111-000-1111
-/PORT_RESPONSE/DATA/PORTED_NUM=000-000-0000
+/MYELEMENT/HEADER/CODE=XXXX
+/MYELEMENT/HEADER/NAME=SOMEDEST
+/MYELEMENT/HEADER/ID=XXXXX1111XXX
+/MYELEMENT/HEADER/TYPE=START
+/MYELEMENT/MAIN/ELEMENTX/@attr1=Value1
+/MYELEMENT/MAIN/ELEMENTX/@attr2=Value2
+/MYELEMENT/MAIN/ELEMENTX=ElemValue
+/MYELEMENT/MAIN/NO=123123
+/MYELEMENT/MAIN/TXT=Some
+/MYELEMENT/MAIN/DIR=111-000-1111
+/MYELEMENT/DATA/NUM=000-000-0000
 ```
 ### Xmllint and XPATH ###
 
@@ -60,7 +60,7 @@ http://www.w3schools.com/xml/xpath_examples.asp
 
 Get element PORTED_NUM value:
 ```sh
-xmllint example.xml --xpath '//PORTED_NUM/text()'
+xmllint example.xml --xpath '//NUM/text()'
 ```
 
 ### PostgreSQL ###
@@ -90,23 +90,23 @@ you can use any awk, add getXML.awk to the end of your awk-script.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<PORT_RESPONSE>
+<MYELEMENT>
   <HEADER>
-    <ORIGINATOR>XXXX</ORIGINATOR>
-    <DESTINATION>SOMEDEST</DESTINATION>
-    <MESSAGE_ID>XXXXX1111XXX</MESSAGE_ID>
-    <MSGTYPE>PRI</MSGTYPE>
+    <CODE>XXXX</CODE>
+    <NAME>SOMEDEST</NAME>
+    <ID>XXXXX1111XXX</ID>
+    <TYPE>START</TYPE>
   </HEADER>
-  <ADMIN>
-    <ELEMENTX attr1="Value1" attr2="Value2">5.0.0</ELEMENTX>
+  <MAIN>
+    <ELEMENTX attr1="Value1" attr2="Value2">ElemValue</ELEMENTX>
     <NO>123123</NO>
-    <REP>Some</REP>
-    <NO_REP>111-000-1111</NO_REP>
-  </ADMIN>
+    <TXT>Some</TXT>
+    <DIR>111-000-1111</DIR>
+  </MAIN>
   <DATA>
-    <PORTED_NUM>000-000-0000</PORTED_NUM>
+    <NUM>000-000-0000</NUM>
   </DATA>
-</PORT_RESPONSE>
+</MYELEMENT>
 ```
 
 
@@ -127,17 +127,17 @@ Parse xml and printout out only element and attribute values with path:
 Output:
 ```text
 TAG|ELEMENT|PATH|ATTR|VALUE
-DAT|ORIGINATOR|/PORT_RESPONSE/HEADER/ORIGINATOR||XXXX
-DAT|DESTINATION|/PORT_RESPONSE/HEADER/DESTINATION||SOMEDEST
-DAT|MESSAGE_ID|/PORT_RESPONSE/HEADER/MESSAGE_ID||XXXXX1111XXX
-DAT|MSGTYPE|/PORT_RESPONSE/HEADER/MSGTYPE||PRI
-ATTR|ELEMENTX|/PORT_RESPONSE/ADMIN/ELEMENTX|attr1|Value1
-ATTR|ELEMENTX|/PORT_RESPONSE/ADMIN/ELEMENTX|attr2|Value2
-DAT|ELEMENTX|/PORT_RESPONSE/ADMIN/ELEMENTX||5.0.0
-DAT|NO|/PORT_RESPONSE/ADMIN/NO||123123
-DAT|REP|/PORT_RESPONSE/ADMIN/REP||Some
-DAT|NO_REP|/PORT_RESPONSE/ADMIN/NO_REP||111-000-1111
-DAT|PORTED_NUM|/PORT_RESPONSE/DATA/PORTED_NUM||000-000-0000
+DAT|CODE|/MYELEMENT/HEADER/CODE||XXXX
+DAT|NAME|/MYELEMENT/HEADER/NAME||SOMEDEST
+DAT|ID|/MYELEMENT/HEADER/ID||XXXXX1111XXX
+DAT|TYPE|/MYELEMENT/HEADER/TYPE||START
+ATTR|ELEMENTX|/MYELEMENT/MAIN/ELEMENTX|attr1|Value1
+ATTR|ELEMENTX|/MYELEMENT/MAIN/ELEMENTX|attr2|Value2
+DAT|ELEMENTX|/MYELEMENT/MAIN/ELEMENTX||ElemValue
+DAT|NO|/MYELEMENT/MAIN/NO||123123
+DAT|TXT|/MYELEMENT/MAIN/TXT||Some
+DAT|DIR|/MYELEMENT/MAIN/DIR||111-000-1111
+DAT|NUM|/MYELEMENT/DATA/NUM||000-000-0000
 ```
 
 ### get.3.example.awk ###
@@ -149,7 +149,7 @@ Parse get.2.example.awk output = basic awk processing ...
 Output:
 ```text
 attr1 Value1
-PORTED_NUM 000-000-0000
+NUM 000-000-0000
 ```
 
 ## Simple AWK XML Parser ##
@@ -160,7 +160,7 @@ This idea is simple: parse input using delimiter chars < > | " =
 awk -F '[<|>="]' '
 
 # give some rules to search interesting values, example:
-/PORTED_NUM/{print "FOUND:",$3}
+/NUM/{print "FOUND:",$3}
 
 # here is debug printing, easier to see what you can do/get
                 {#-debug print
@@ -173,32 +173,31 @@ awk -F '[<|>="]' '
 Output
 ```text
 1: 2:?xml version 3: 4:1.0 5: encoding 6: 7:UTF-8 8:? 9:
-1: 2:PORT_RESPONSE 3:
+1: 2:MYELEMENT 3:
 1:   2:HEADER 3:
-1:     2:ORIGINATOR 3:XXXX 4:/ORIGINATOR 5:
-1:     2:DESTINATION 3:SOMEDEST 4:/DESTINATION 5:
-1:     2:MESSAGE_ID 3:XXXXX1111XXX 4:/MESSAGE_ID 5:
-1:     2:MSGTYPE 3:PRI 4:/MSGTYPE 5:
+1:     2:CODE 3:XXXX 4:/CODE 5:
+1:     2:NAME 3:SOMEDEST 4:/NAME 5:
+1:     2:ID 3:XXXXX1111XXX 4:/ID 5:
+1:     2:TYPE 3:START 4:/TYPE 5:
 1:   2:/HEADER 3:
-1:   2:ADMIN 3:
-1:     2:ELEMENTX attr1 3: 4:Value1 5: attr2 6: 7:Value2 8: 9:5.0.0 10:/ELEMENTX 11:
+1:   2:MAIN 3:
+1:     2:ELEMENTX attr1 3: 4:Value1 5: attr2 6: 7:Value2 8: 9:ElemValue 10:/ELEMENTX 11:
 1:     2:NO 3:123123 4:/NO 5:
-1:     2:REP 3:Some 4:/REP 5:
-1:     2:NO_REP 3:111-000-1111 4:/NO_REP 5:
-1:   2:/ADMIN 3:
+1:     2:TXT 3:Some 4:/TXT 5:
+1:     2:DIR 3:111-000-1111 4:/DIR 5:
+1:   2:/MAIN 3:
 1:   2:DATA 3:
 FOUND: 000-000-0000
-1:     2:PORTED_NUM 3:000-000-0000 4:/PORTED_NUM 5:
+1:     2:NUM 3:000-000-0000 4:/NUM 5:
 1:   2:/DATA 3:
-1: 2:/PORT_RESPONSE 3:
-
+1: 2:/MYELEMENT 3:
 ```
 
 
 Very simple method to get element value:
 
 ```awk
-awk -F'</?PORTED_NUM>' 'NF>1{print $2}' example.xml
+awk -F'</?NUM>' 'NF>1{print $2}' example.xml
 ```
 
 Output:
@@ -209,12 +208,12 @@ OR
 
 Caller give the element name to get values
 ```awk
-awk -v key=PORTED_NUM '
+awk -v elem=NUM '
 BEGIN {
     RS="<"
     FS=">"
     }
-$1 == key { print $2 }
+$1 == elem { print $2 }
 ' example.xml
 
 ```
