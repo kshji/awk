@@ -58,7 +58,7 @@ Output:
 **XPath** ?
 http://www.w3schools.com/xml/xpath_examples.asp
 
-Get element PORTED_NUM value:
+Get element NUM value:
 ```sh
 xmllint example.xml --xpath '//NUM/text()'
 ```
