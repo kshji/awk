@@ -7,7 +7,8 @@ https://www.postgresql.org/docs/current/static/functions-xml.html
 
 ## Example xml ##
 
-```xml example.xml
+example.xml
+```xml 
 <promotions>
     <promotion promotion-id="old-promotion">
         <nametext>some1</nametext>
@@ -51,7 +52,8 @@ I like to use XML without namespaces.
 
 Here is some stylesheet which you can use to remove namespace from xml file.
 
-```xsl rm_namespace.xsl
+rm_namespace.xsl
+```xsl 
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="xml" indent="no"/>
  
@@ -144,7 +146,6 @@ SELECT xpath('//@promotion-id',       node) promotion_id
       ,xpath('//price/text()',        node) price
 FROM (SELECT unnest(xpath('/promotions/promotion', t)) AS node FROM x) sub
 ;
-
 ```
 
 ```sql
