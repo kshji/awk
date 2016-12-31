@@ -30,9 +30,9 @@ example.xml
 
 ## Create table ##
 
-Create table **xmlinput** to the schema **some**
+Create table **xmlinput** to the schema **my**
 ```sql
-CREATE TABLE some.xmlinput
+CREATE TABLE my.xmlinput
 (
   id serial NOT NULL,
   created TIMESTAMP WITH TIME zone NOT NULL DEFAULT now(),
@@ -95,10 +95,10 @@ PG COPY command is fast to handle CSV, JSON, XML, pipes, ... , don't try INSERT.
 
 Use psql command to COPY xml to the field xmldoc (or xmldata if valilated xml):
 ```sh
-psql -d databasename -h hostname -p 5432 -U dbuser -c '\copy some.xmlinput (xmldoc) from purepacked.xml'
+psql -d databasename -h hostname -p 5432 -U dbuser -c '\copy my.xmlinput (xmldoc) from purepacked.xml'
 # OR pipe sql command from stdin, this method you can use variables in sql syntax
 echo "
-\\copy some.xmlinput (xmldoc) from purepacked.xml
+\\copy my.xmlinput (xmldoc) from purepacked.xml
 ;" | psql -d databasename -h hostname -p 5432 -U dbuser
 ```
 
@@ -109,7 +109,7 @@ SET XML OPTION DOCUMENT; --CONTENT
 
 -- validate, true/false
 SELECT	xmlparse(DOCUMENT xmldoc)
-FROM some.xmlinput WHERE id=1
+FROM my.xmlinput WHERE id=1
 ;
 
 -- parse xml text to the field type xml
