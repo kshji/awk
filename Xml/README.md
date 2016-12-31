@@ -160,13 +160,13 @@ This idea is simple: parse input using delimiter chars < > | " =
 awk -F '[<|>="]' '
 
 # give some rules to search interesting values, example:
-/NUM/{print "FOUND:",$3}
+/NUM/ { print "FOUND:",$3 }
 
 # here is debug printing, easier to see what you can do/get
-                {#-debug print
-                  for (f=1;f<=NF;f++) printf "%d:%s ",f,$f
-                  printf "\n"
-                }
+      {#-debug print
+         for (f=1;f<=NF;f++) printf "%d:%s ",f,$f
+         printf "\n"
+      }
 
 ' example.xml
 ```
