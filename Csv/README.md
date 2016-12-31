@@ -1,5 +1,5 @@
 # CSV parsing using Awk #
-Here is some solution to parse csv dynamically and use column names as variable.
+Here is solution to parse csv dynamically and use column names as variable.
 
 
 Using example:
