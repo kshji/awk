@@ -30,7 +30,7 @@ example.xml
 
 ## Create table ##
 
-Create table **xmlinput** to the schema **my**
+Create table **xmlinput** , schema **my**
 ```sql
 CREATE TABLE my.xmlinput
 (
@@ -48,7 +48,7 @@ WITH (
 ```
 
 ## Remove namespace ##
-I like to use XML without namespaces. 
+I like to use XML without namespaces.  
 
 Here is some stylesheet which you can use to remove namespace from xml file.
 
@@ -201,6 +201,6 @@ FROM my.xmlinput
 
 ```
 
-Look more functions from doc. Example  **xpath_table** is powerfull function to make 
+Look more functions from doc. Example  **xpath_table** is powerful function to make 
 relations from xml.
 
