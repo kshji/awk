@@ -1,7 +1,6 @@
 #!/usr/local/bin/awsh
 # vat.sh
-# - tarkistetaan VAT koodin voimassaolo
-# - check VAT code
+# - check VAT code, VAT code validity
 #  vat.sh -c FI -n 17802552
 #  vat.sh -v FI17802552
 #  vat.sh -v FI17802552 -o csv
