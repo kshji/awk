@@ -217,3 +217,11 @@ $1 == elem { print $2 }
 ' example.xml
 
 ```
+
+## Check EU VAT code validity ##
+
+```sh
+vat.sh -v FI17802552 -o list
+vat.sh -v FI17802552 -o xml
+vat.sh -v FI17802552 -o csv
+```
