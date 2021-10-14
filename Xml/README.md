@@ -34,6 +34,16 @@ Other interesting command tools to handle Xml-data:
    * xmllint
    * PostgreSQL
 
+### XmlStarlet ###
+Excellent XPath commandline tool
+```sh
+# match elelent Transaction
+# value of elements MerchantNo in node Transaction
+# delimiter | between values, like concat function and newline after matched node
+xmlstarlet sel -T -t -m '//Transaction' -v './MerchantNo' -o '|' -v './FinnishRefNo'  -nl file.xml
+```sh
+
+
 ### Xml2 ###
 ```sh
 xml2 < example.xml
